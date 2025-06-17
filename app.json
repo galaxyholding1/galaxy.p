@@ -1,4 +1,11 @@
-{
-  "name": "GalaxyPayApp",
-  "displayName": "GalaxyPayApp"
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import AppNavigator from './app/navigation/AppNavigator'; // ajusta según tu ruta real
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <AppNavigator />
+    </NavigationContainer>
+  );
 }
