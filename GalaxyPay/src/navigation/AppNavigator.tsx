@@ -39,13 +39,18 @@ import RemesaBiometriaScreen from '../screens/RemesaBiometriaScreen';
 import RemesaConfirmacionExitosaScreen from '../screens/RemesaConfirmacionExitosaScreen';
 import RemesaReporteScreen from '../screens/RemesaReporteScreen';
 
-// Flujo de Avatares
+// Flujo de Avatares / Perfil
 import PerfilScreen from '../screens/PerfilScreen';
 import CambiarAvatarMenuScreen from '../screens/CambiarAvatarMenuScreen';
 import AñadirAvatarIntroScreen from '../screens/AñadirAvatarIntroScreen';
 import AñadirAvatarFiltrosScreen from '../screens/AñadirAvatarFiltrosScreen';
 import SeleccionAvatarScreen from '../screens/SeleccionAvatarScreen';
 import AvatarFinalScreen from '../screens/AvatarFinalScreen';
+
+// Registro corporativo
+import RegistroEmpresaStep1Screen from '../screens/RegistroEmpresaStep1Screen';
+import RegistroEmpresaStep2Screen from '../screens/RegistroEmpresaStep2Screen';
+import RegistroEmpresaStep3Screen from '../screens/RegistroEmpresaStep3Screen';
 
 const Stack = createStackNavigator();
 
@@ -94,6 +99,11 @@ const AppNavigator = () => (
       <Stack.Screen name="AñadirAvatarFiltros" component={AñadirAvatarFiltrosScreen} />
       <Stack.Screen name="SeleccionAvatar" component={SeleccionAvatarScreen} />
       <Stack.Screen name="AvatarFinal" component={AvatarFinalScreen} />
+
+      {/* Registro corporativo */}
+      <Stack.Screen name="RegistroEmpresaStep1" component={RegistroEmpresaStep1Screen} />
+      <Stack.Screen name="RegistroEmpresaStep2" component={RegistroEmpresaStep2Screen} />
+      <Stack.Screen name="RegistroEmpresaStep3" component={RegistroEmpresaStep3Screen} />
     </Stack.Navigator>
   </NavigationContainer>
 );
