@@ -1,19 +1,14 @@
 import React, { useState } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  SafeAreaView,
-  Modal,
-  FlatList,
+  View, Text, StyleSheet, Image, TouchableOpacity, SafeAreaView, Modal, FlatList
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 const skinColors = ['#fbd1c7', '#f5c89d', '#deb890', '#c7956d', '#a76f47', '#8b572a', '#6b3b18', '#3a1f0f', '#fff1e0'];
 const hairColors = ['#000000', '#5C4033', '#B5651D', '#D2B48C', '#FFD700', '#A9A9A9', '#FFFFFF', '#FF5733', '#C71585'];
-const etniaOptions = ['Latino', 'Europeo', 'Asiática', 'Africano', 'Opción 5'];
+const etniaOptions = ['Latino', 'Europeo', 'Asiática', 'Africano', 'Otro'];
 
-export default function AñadirAvatarOpcionesScreen() {
+export default function AvatarSetupScreen() {
   const [selectedSkin, setSelectedSkin] = useState('');
   const [selectedHair, setSelectedHair] = useState('');
   const [selectedEtnia, setSelectedEtnia] = useState('');
@@ -70,41 +65,30 @@ export default function AñadirAvatarOpcionesScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.title}>Añadir Avatar</Text>
-        <Text style={styles.tab}>Mi Perfil</Text>
-      </View>
+      <Text style={styles.title}>Añade el avatar a tu perfil</Text>
+
+      <Image source={{ uri: 'https://via.placeholder.com/150' }} style={styles.avatar} />
+      <Text style={styles.description}>Muestra tu personalidad con tu avatar en una pose y un fondo.</Text>
 
       {/* Botones de selección */}
       <TouchableOpacity style={styles.selector} onPress={() => openModal('skin')}>
-        <Text style={styles.selectorText}>
-          {selectedSkin ? 'Color de piel seleccionado' : 'selecciona color de piel'}
-        </Text>
+        <Text style={styles.selectorText}>{selectedSkin ? 'Color de piel seleccionado' : 'Selecciona color de piel'}</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.selector} onPress={() => openModal('hair')}>
-        <Text style={styles.selectorText}>
-          {selectedHair ? 'Color de cabello seleccionado' : 'selecciona color de cabello'}
-        </Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.selector}>
-        <Text style={styles.selectorText}>selecciona estilo de cabello</Text>
+        <Text style={styles.selectorText}>{selectedHair ? 'Color de cabello seleccionado' : 'Selecciona color de cabello'}</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.selector} onPress={() => openModal('etnia')}>
-        <Text style={styles.selectorText}>
-          {selectedEtnia ? `Etnia: ${selectedEtnia}` : 'selecciona etnia'}
-        </Text>
+        <Text style={styles.selectorText}>{selectedEtnia ? Etnia: ${selectedEtnia} : 'Selecciona etnia'}</Text>
       </TouchableOpacity>
 
-      {/* Botón continuar */}
-      <TouchableOpacity style={styles.nextButton}>
-        <Text style={styles.nextText}>Siguiente</Text>
+      {/* Botones de acción */}
+      <TouchableOpacity style={styles.mainButton}>
+        <Text style={styles.buttonText}>Guardar avatar</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.skipButton}>
+      <TouchableOpacity>
         <Text style={styles.skipText}>Ahora no</Text>
       </TouchableOpacity>
 
@@ -130,54 +114,32 @@ export default function AñadirAvatarOpcionesScreen() {
   );
 }
 
-// Estilos
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#1c1c1e',
-    padding: 20,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 20,
-  },
-  title: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  tab: {
-    color: '#f0813a',
-    fontSize: 14,
-  },
+  container: { flex: 1, backgroundColor: '#1c1c1e', alignItems: 'center', padding: 20 },
+  title: { fontSize: 16, color: '#f54690', marginVertical: 10 },
+  avatar: { width: 120, height: 120, borderRadius: 60, marginVertical: 20 },
+  description: { color: '#ccc', textAlign: 'center', marginBottom: 20 },
+
   selector: {
     backgroundColor: '#2a2a2a',
     padding: 14,
     borderRadius: 8,
-    marginBottom: 12,
+    marginBottom: 10,
+    width: '90%',
   },
-  selectorText: {
-    color: '#fff',
-  },
-  nextButton: {
-    backgroundColor: '#e7458f',
-    borderRadius: 12,
-    padding: 14,
-    alignItems: 'center',
+  selectorText: { color: '#fff', textAlign: 'center' },
+
+  mainButton: {
+    backgroundColor: '#f54690',
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 20,
     marginTop: 20,
   },
-  nextText: {
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-  skipButton: {
-    marginTop: 16,
-    alignItems: 'center',
-  },
-  skipText: {
-    color: '#ccc',
-  },
+  buttonText: { color: '#fff', fontWeight: 'bold' },
+
+  skipText: { color: '#ccc', marginTop: 15 },
+
   modalOverlay: {
     flex: 1,
     backgroundColor: '#000000aa',
