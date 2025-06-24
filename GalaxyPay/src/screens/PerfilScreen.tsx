@@ -118,7 +118,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'linear-gradient(180deg, #FF6B6B, #C44BC6)',
     borderRadius: 12,
     padding: 20,
-    backgroundColor: '#d24e9d', // simulación del degradado
   },
   menuHeader: {
     flexDirection: 'row',
