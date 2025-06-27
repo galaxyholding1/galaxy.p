@@ -47,7 +47,7 @@ const WelcomeScreen = ({ navigation }) => {
         </TouchableOpacity>
         
         <TouchableOpacity onPress={handleKYC} style={styles.kycButton}>
-          <Text style={styles.btnText}>Verificar Identidad</Text>
+          <Text style={styles.btnText}>¿Eres empresa?</Text>
         </TouchableOpacity>
       </View>
     </ImageBackground>

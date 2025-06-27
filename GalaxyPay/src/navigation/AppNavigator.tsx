@@ -51,6 +51,7 @@ import AvatarFinalScreen from '../screens/AvatarFinalScreen';
 import RegistroEmpresaStep1Screen from '../screens/RegistroEmpresaStep1Screen';
 import RegistroEmpresaStep2Screen from '../screens/RegistroEmpresaStep2Screen';
 import RegistroEmpresaStep3Screen from '../screens/RegistroEmpresaStep3Screen';
+import RegistroEmpresaStep3Screen from '../screens/RegistroEmpresaStep4Screen';
 
 const Stack = createStackNavigator();
 
