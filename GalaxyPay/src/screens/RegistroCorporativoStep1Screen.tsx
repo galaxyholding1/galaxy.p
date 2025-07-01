@@ -7,9 +7,9 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
-  Picker,
-  CheckBox,
+  Modal,
   ScrollView,
+  CheckBox,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -18,6 +18,14 @@ const RegistroCorporativoStep1Screen = () => {
   const [email, setEmail] = useState('');
   const [telefono, setTelefono] = useState('');
   const [terminosAceptados, setTerminosAceptados] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [codigoVerificacion, setCodigoVerificacion] = useState('');
+
+  const handleContinuar = () => {
+    if (terminosAceptados) {
+      setShowModal(true); // Simula la solicitud de código SMS
+    }
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -34,7 +42,7 @@ const RegistroCorporativoStep1Screen = () => {
               key={index}
               style={[
                 styles.progressDot,
-                index === 0 && styles.activeDot, // Primera pantalla activa
+                index === 0 && styles.activeDot,
               ]}
             />
           ))}
@@ -96,6 +104,7 @@ const RegistroCorporativoStep1Screen = () => {
             !terminosAceptados && { backgroundColor: '#999' },
           ]}
           disabled={!terminosAceptados}
+          onPress={handleContinuar}
         >
           <Text style={styles.continueText}>continuar</Text>
         </TouchableOpacity>
@@ -105,6 +114,48 @@ const RegistroCorporativoStep1Screen = () => {
           source={require('../assets/icon-galaxy.png')}
           style={styles.logoBottom}
         />
+
+        {/* Modal de verificación */}
+        <Modal
+          visible={showModal}
+          transparent
+          animationType="fade"
+        >
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalContainer}>
+              <View style={styles.modalHeader}>
+                <Text style={styles.modalTitle}>Verificación número de teléfono</Text>
+                <TouchableOpacity onPress={() => setShowModal(false)}>
+                  <Ionicons name="close" size={20} color="#fff" />
+                </TouchableOpacity>
+              </View>
+
+              <TextInput
+                placeholder="Código"
+                placeholderTextColor="#ccc"
+                style={styles.modalInput}
+                value={codigoVerificacion}
+                onChangeText={setCodigoVerificacion}
+              />
+
+              <TouchableOpacity style={styles.activateButton}>
+                <Text style={styles.activateText}>Activar</Text>
+              </TouchableOpacity>
+
+              <Text style={styles.modalMessage}>
+                Ingresa el código de verificación que se ha 
+                enviado al número (+60) 336363626
+              </Text>
+              <Text style={styles.modalNote}>
+                El código expira en 10 minutos. Utilízalo o solicita uno nuevo.
+              </Text>
+
+              <TouchableOpacity style={styles.resendButton}>
+                <Text style={styles.resendText}>solicitar nuevo código</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
       </ScrollView>
     </SafeAreaView>
   );
@@ -113,22 +164,10 @@ const RegistroCorporativoStep1Screen = () => {
 export default RegistroCorporativoStep1Screen;
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: '#1c1c1e',
-  },
-  container: {
-    padding: 20,
-    alignItems: 'center',
-  },
-  backButton: {
-    alignSelf: 'flex-start',
-    marginBottom: 10,
-  },
-  progressBarContainer: {
-    flexDirection: 'row',
-    marginBottom: 30,
-  },
+  safeArea: { flex: 1, backgroundColor: '#1c1c1e' },
+  container: { padding: 20, alignItems: 'center' },
+  backButton: { alignSelf: 'flex-start', marginBottom: 10 },
+  progressBarContainer: { flexDirection: 'row', marginBottom: 30 },
   progressDot: {
     width: 30,
     height: 5,
@@ -136,9 +175,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginRight: 5,
   },
-  activeDot: {
-    backgroundColor: '#e7458f',
-  },
+  activeDot: { backgroundColor: '#e7458f' },
   logo: {
     width: 140,
     height: 40,
@@ -168,10 +205,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  inputText: {
-    color: '#ccc',
-    fontSize: 14,
-  },
+  inputText: { color: '#ccc', fontSize: 14 },
   termsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -203,5 +237,67 @@ const styles = StyleSheet.create({
     height: 60,
     resizeMode: 'contain',
     marginTop: 20,
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  modalContainer: {
+    width: '100%',
+    backgroundColor: '#2a2a2a',
+    borderRadius: 10,
+    padding: 20,
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 14,
+  },
+  modalTitle: {
+    color: '#fff',
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
+  modalInput: {
+    backgroundColor: '#1c1c1e',
+    color: '#fff',
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 10,
+  },
+  activateButton: {
+    backgroundColor: '#f0813a',
+    borderRadius: 10,
+    padding: 10,
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  activateText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  modalMessage: {
+    color: '#fff',
+    fontSize: 13,
+    marginBottom: 6,
+  },
+  modalNote: {
+    color: '#ccc',
+    fontSize: 12,
+    marginBottom: 14,
+  },
+  resendButton: {
+    backgroundColor: '#e7458f',
+    borderRadius: 10,
+    paddingVertical: 12,
+    alignItems: 'center',
+  },
+  resendText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
   },
 });
