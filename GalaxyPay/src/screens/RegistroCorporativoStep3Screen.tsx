@@ -11,9 +11,9 @@ import {
   FlatList,
   Modal,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const RegistroCorporativoStep4Screen = () => {
+const RegistroCorporativoStep3Screen = () => {
   const [razonSocial, setRazonSocial] = useState('');
   const [domicilio, setDomicilio] = useState('');
   const [formaJuridica, setFormaJuridica] = useState('');
@@ -35,25 +35,26 @@ const RegistroCorporativoStep4Screen = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.container}>
+
         {/* Botón de retroceso */}
         <TouchableOpacity style={styles.backButton}>
           <Ionicons name="arrow-back" size={24} color="#fff" />
         </TouchableOpacity>
 
-        {/* Progreso */}
+        {/* Barra de progreso */}
         <View style={styles.progressBar}>
           {[...Array(6)].map((_, index) => (
             <View
               key={index}
               style={[
                 styles.progressDot,
-                index === 3 && styles.activeDot,
+                index === 2 && styles.activeDot, // Paso actual
               ]}
             />
           ))}
         </View>
 
-        {/* Encabezado */}
+        {/* Logo y subtítulo */}
         <Text style={styles.logo}>galaxypay</Text>
         <Text style={styles.subTitle}>Información de la empresa</Text>
 
@@ -74,8 +75,6 @@ const RegistroCorporativoStep4Screen = () => {
           onChangeText={setDomicilio}
         />
 
-        <Text style={styles.subSection}>Forma jurídica de la empresa</Text>
-
         <TouchableOpacity
           style={styles.input}
           onPress={() => setShowMenu(true)}
@@ -86,7 +85,7 @@ const RegistroCorporativoStep4Screen = () => {
           <Ionicons name="chevron-down-outline" size={20} color="#ccc" />
         </TouchableOpacity>
 
-        {/* Menú modal de forma jurídica */}
+        {/* Modal con opciones */}
         <Modal
           visible={showMenu}
           transparent
@@ -120,33 +119,38 @@ const RegistroCorporativoStep4Screen = () => {
           </View>
         </Modal>
 
-        <TouchableOpacity style={styles.input}>
-          <Text style={styles.inputText}>Datos de socios principales</Text>
+        {/* Subtítulo */}
+        <Text style={styles.subSection}>Socios principales</Text>
+
+        {/* Botones */}
+        <TouchableOpacity style={styles.addButton}>
+          <Text style={styles.addButtonText}>añadir socios principales</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.input}>
-          <Text style={styles.inputText}>Gestionar empleados</Text>
+        <TouchableOpacity style={styles.manageButton}>
+          <Text style={styles.manageButtonText}>gestionar empleados</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.verificationButton}>
-          <Text style={styles.verificationText}>Acelerar controles de verificación</Text>
-          <Ionicons name="arrow-forward-outline" size={18} color="#fff" />
+          <Text style={styles.verificationText}>acelerar controles de verificación</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>continuar</Text>
         </TouchableOpacity>
 
+        {/* Logo inferior */}
         <Image
           source={require('../assets/icon-galaxy.png')}
           style={styles.logoBottom}
         />
+
       </ScrollView>
     </SafeAreaView>
   );
 };
 
-export default RegistroCorporativoStep4Screen;
+export default RegistroCorporativoStep3Screen;
 
 const styles = StyleSheet.create({
   safeArea: {
@@ -186,13 +190,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
   },
-  subSection: {
-    alignSelf: 'flex-start',
-    color: '#f0813a',
-    marginBottom: 10,
-    marginTop: 10,
-    fontWeight: '500',
-  },
   input: {
     backgroundColor: '#2a2a2a',
     borderRadius: 10,
@@ -208,36 +205,65 @@ const styles = StyleSheet.create({
     color: '#ccc',
     fontSize: 14,
   },
-  verificationButton: {
-    backgroundColor: '#6b4aff',
-    borderRadius: 10,
+  subSection: {
+    alignSelf: 'flex-start',
+    color: '#f0813a',
+    marginBottom: 10,
+    marginTop: 10,
+    fontWeight: '500',
+  },
+  addButton: {
+    backgroundColor: '#4c3b90',
+    borderRadius: 12,
     paddingVertical: 14,
-    paddingHorizontal: 20,
     width: '100%',
     alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    gap: 8,
-    marginTop: 5,
+    marginBottom: 10,
+  },
+  addButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    textTransform: 'lowercase',
+  },
+  manageButton: {
+    backgroundColor: '#6b4aff',
+    borderRadius: 12,
+    paddingVertical: 14,
+    width: '100%',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  manageButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    textTransform: 'lowercase',
+  },
+  verificationButton: {
+    backgroundColor: '#e7458f',
+    borderRadius: 12,
+    paddingVertical: 14,
+    width: '100%',
+    alignItems: 'center',
     marginBottom: 20,
   },
   verificationText: {
     color: '#fff',
     fontWeight: 'bold',
+    textTransform: 'lowercase',
   },
   button: {
-    backgroundColor: '#e7458f',
+    backgroundColor: '#f0813a',
     borderRadius: 12,
     paddingVertical: 14,
-    paddingHorizontal: 40,
-    alignItems: 'center',
     width: '100%',
+    alignItems: 'center',
     marginBottom: 20,
   },
   buttonText: {
     color: '#fff',
     fontSize: 15,
     fontWeight: 'bold',
+    textTransform: 'lowercase',
   },
   logoBottom: {
     width: 60,
